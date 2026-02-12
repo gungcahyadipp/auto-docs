@@ -1,0 +1,43 @@
+{
+    "name": "gungcahyadipp/auto-docs",
+    "description": "All-in-one API documentation for Laravel. Bundles Scramble and Scramble Pro.",
+    "keywords": [
+        "laravel",
+        "documentation",
+        "openapi",
+        "scramble",
+        "auto-docs"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Gung Cahyadi",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "illuminate/contracts": "^10.0|^11.0|^12.0",
+        "myclabs/deep-copy": "^1.12",
+        "nikic/php-parser": "^5.0",
+        "phpstan/phpdoc-parser": "^1.0|^2.0",
+        "spatie/laravel-package-tools": "^1.9.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "GungCahyadiPP\\AutoDocs\\": "src/",
+            "Dedoc\\Scramble\\": "packages/scramble/src/",
+            "Dedoc\\Scramble\\Database\\Factories\\": "packages/scramble/database/factories/",
+            "Dedoc\\ScramblePro\\": "packages/scramble-pro/src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "GungCahyadiPP\\AutoDocs\\AutoDocsServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
