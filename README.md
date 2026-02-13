@@ -9,21 +9,6 @@ All-in-one API documentation package for Laravel. Bundles [Scramble](https://scr
 
 ## Installation
 
-Add the repository to your project's `composer.json`:
-
-```json
-{
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://gitlab.com/gungcahyadipp/auto-docs.git"
-        }
-    ]
-}
-```
-
-Then install:
-
 ```bash
 composer require gungcahyadipp/auto-docs
 ```
