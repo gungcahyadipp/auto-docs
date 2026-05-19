@@ -23,7 +23,7 @@ class GeneratorConfigCollection
     {
         return (new GeneratorConfig)
             ->expose(
-                ui: fn (Router $router, $action) => $router->get('docs/api', $action)->name('scramble.docs.ui'),
+                ui: fn (Router $router, $action) => $router->get('docs', $action)->name('scramble.docs.ui'),
                 document: fn (Router $router, $action) => $router->get('docs/api.json', $action)->name('scramble.docs.document'),
             );
     }

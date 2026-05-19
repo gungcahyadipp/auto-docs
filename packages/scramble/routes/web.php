@@ -1,7 +1,4 @@
 <?php
 
-use Dedoc\Scramble\Scramble;
-
-Scramble::registerUiRoute(path: 'docs')->name('scramble.docs.ui');
-
-Scramble::registerJsonSpecificationRoute(path: 'docs/api.json')->name('scramble.docs.document');
+// Routes are registered programmatically via ScrambleServiceProvider::registerRoutes()
+// This file is kept for reference only and is NOT loaded automatically.
