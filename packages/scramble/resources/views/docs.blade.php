@@ -253,6 +253,56 @@
         [data-theme="dark"] .autodocs-search-hint {
             border-color: #444;
         }
+
+        /* Fixed search trigger button */
+        .autodocs-search-trigger {
+            position: fixed;
+            top: 12px;
+            right: 16px;
+            z-index: 99998;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            border-radius: 8px;
+            border: 1px solid var(--color-border, #e2e8f0);
+            background: var(--color-canvas, #fff);
+            color: #64748b;
+            font-size: 13px;
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: all 0.15s ease;
+        }
+        .autodocs-search-trigger:hover {
+            border-color: #8b5cf6;
+            color: #8b5cf6;
+            box-shadow: 0 2px 8px rgba(139, 92, 246, 0.15);
+        }
+        [data-theme="dark"] .autodocs-search-trigger {
+            background: #1e1e2e;
+            border-color: #444;
+            color: #94a3b8;
+        }
+        [data-theme="dark"] .autodocs-search-trigger:hover {
+            border-color: #a78bfa;
+            color: #a78bfa;
+        }
+        .autodocs-search-trigger svg {
+            flex-shrink: 0;
+        }
+        .autodocs-search-trigger-kbd {
+            font-size: 11px;
+            padding: 1px 5px;
+            border-radius: 3px;
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            color: #94a3b8;
+            font-family: monospace;
+        }
+        [data-theme="dark"] .autodocs-search-trigger-kbd {
+            background: #333;
+            border-color: #555;
+        }
     </style>
 </head>
 <body style="height: 100vh; overflow-y: hidden">
@@ -290,6 +340,16 @@
         updateTheme(mediaQuery);
     </script>
 @endif
+
+<!-- Fixed Search Button -->
+<button class="autodocs-search-trigger" id="searchTrigger" type="button" aria-label="Search endpoints">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="m21 21-4.35-4.35"></path>
+    </svg>
+    <span>Search...</span>
+    <kbd class="autodocs-search-trigger-kbd">⌘K</kbd>
+</button>
 
 <!-- Search Overlay -->
 <div class="autodocs-search-overlay" id="searchOverlay">
@@ -451,6 +511,11 @@
     // Event: click overlay background to close
     overlay.addEventListener('click', function(e) {
         if (e.target === overlay) closeSearch();
+    });
+
+    // Event: search trigger button click
+    document.getElementById('searchTrigger').addEventListener('click', function() {
+        openSearch();
     });
 })();
 </script>
