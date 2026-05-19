@@ -92,13 +92,13 @@ class AutoDocsServiceProvider extends ServiceProvider
             ], 'autodocs-config');
 
             $this->publishes([
-                __DIR__.'/../resources/docs/description.md' => resource_path('docs/autodocs-description.md'),
+                __DIR__.'/../resources/docs/description.md' => base_path('autodocs/description.md'),
             ], 'autodocs-description');
 
             // Publish all at once
             $this->publishes([
                 __DIR__.'/../config/autodocs.php' => config_path('autodocs.php'),
-                __DIR__.'/../resources/docs/description.md' => resource_path('docs/autodocs-description.md'),
+                __DIR__.'/../resources/docs/description.md' => base_path('autodocs/description.md'),
             ], 'autodocs');
         }
     }
@@ -106,16 +106,15 @@ class AutoDocsServiceProvider extends ServiceProvider
     /**
      * Register the ExternalDocsOperationExtension to load descriptions
      * from separate markdown files.
+     *
+     * Always registered — the extension itself gracefully handles
+     * missing folders by returning early when no doc file is found.
      */
     protected function registerExternalDocsExtension(): void
     {
-        $docsPath = $this->app['config']->get('autodocs.docs_path');
-
-        if ($docsPath && is_dir($docsPath)) {
-            \Dedoc\Scramble\Scramble::registerExtension(
-                \GungCahyadiPP\AutoDocs\Extensions\ExternalDocsOperationExtension::class
-            );
-        }
+        \Dedoc\Scramble\Scramble::registerExtension(
+            \GungCahyadiPP\AutoDocs\Extensions\ExternalDocsOperationExtension::class
+        );
     }
 
     /**

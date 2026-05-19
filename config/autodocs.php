@@ -61,7 +61,7 @@ return [
     | Publish this file with: php artisan vendor:publish --tag=autodocs-description
     |
     */
-    'description_file' => resource_path('docs/autodocs-description.md'),
+    'description_file' => base_path('autodocs/description.md'),
 
     /*
     |--------------------------------------------------------------------------
@@ -208,10 +208,10 @@ return [
     |
     | Structure: {docs_path}/{ControllerName}/{methodName}.md
     |
-    | Example: docs/api/UserController/index.md
+    | Example: autodocs/UserController/index.md
     |
     */
-    'docs_path' => base_path('docs/api'),
+    'docs_path' => base_path('autodocs'),
 
     /*
     |--------------------------------------------------------------------------

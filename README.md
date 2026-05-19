@@ -65,7 +65,7 @@ return [
         'description' => null, // Loaded from markdown file
     ],
 
-    'description_file' => resource_path('docs/autodocs-description.md'),
+    'description_file' => base_path('autodocs/description.md'),
 
     'ui' => [
         'title' => env('APP_NAME', 'API Documentation'),
@@ -78,7 +78,7 @@ return [
         'format' => 'JWT',
     ],
 
-    'docs_path' => base_path('docs/api'),
+    'docs_path' => base_path('autodocs'),
     'description_strategy' => 'file', // 'file', 'merge', 'fallback'
 ];
 ```
@@ -115,22 +115,79 @@ To disable security entirely:
 
 ## External Docs (Separated Descriptions)
 
-Instead of writing long descriptions in your controller PHPDoc, you can create separate markdown files:
+Instead of writing long descriptions in your controller PHPDoc, you can create separate markdown files. **No changes needed in your controller** — the extension automatically matches doc files to endpoints based on controller name and method.
+
+### Quick Start
+
+1. Generate the skeleton:
+   ```bash
+   php artisan autodocs:generate
+   ```
+
+2. Edit the generated `.md` files in `autodocs/`
+
+3. Visit `/docs` — descriptions are loaded automatically
+
+### How It Works (No Controller Changes Needed)
+
+Given this controller:
+
+```php
+// app/Http/Controllers/Api/V1/UserController.php
+
+namespace App\Http\Controllers\Api\V1;
+
+class UserController extends Controller
+{
+    public function store(StoreUserRequest $request)
+    {
+        // Your logic here — NO PHPDoc needed for description
+        return new UserResource(User::create($request->validated()));
+    }
+}
+```
+
+And this file:
+
+```
+autodocs/V1/UserController/store.md
+```
+
+The docs UI will automatically show the content from `store.md` as the endpoint description. You don't need to add any annotation, attribute, or PHPDoc to the controller.
+
+### Combining with PHPDoc
+
+If you still want to use PHPDoc for some things (like `@unauthenticated` or `@tags`), that works fine:
+
+```php
+/**
+ * @unauthenticated
+ */
+public function login(LoginRequest $request)
+{
+    // Description comes from autodocs/AuthController/login.md
+    // @unauthenticated still works from PHPDoc
+}
+```
+
+The `description_strategy` config controls how external docs interact with any existing PHPDoc description.
+
 
 ### File Structure
 
 ```
-docs/api/
+autodocs/
+├── description.md          ← API homepage description
 ├── UserController/
-│   ├── index.md        → GET /api/users
-│   ├── store.md        → POST /api/users
-│   └── show.md         → GET /api/users/{id}
+│   ├── index.md            → GET /api/users
+│   ├── store.md            → POST /api/users
+│   └── show.md             → GET /api/users/{id}
 ├── V1/
 │   └── UserController/
-│       └── index.md    → For Api\V1\UserController@index
+│       └── index.md        → For Api\V1\UserController@index
 ├── V2/
 │   └── UserController/
-│       └── index.md    → For Api\V2\UserController@index
+│       └── index.md        → For Api\V2\UserController@index
 └── OrderController/
     └── store.md
 ```
@@ -157,11 +214,11 @@ a verification email after successful registration.
 
 For a controller like `App\Http\Controllers\Api\V1\UserController@store`, the extension searches these paths in order:
 
-1. `docs/api/Api/V1/UserController/store.md` (most specific)
-2. `docs/api/V1/UserController/store.md`
-3. `docs/api/UserController/store.md` (only if no V1/V2 conflict)
-4. `docs/api/Api/V1/User/store.md` (without "Controller" suffix)
-5. `docs/api/User/store.md`
+1. `autodocs/Api/V1/UserController/store.md` (most specific)
+2. `autodocs/V1/UserController/store.md`
+3. `autodocs/UserController/store.md` (only if no V1/V2 conflict)
+4. `autodocs/Api/V1/User/store.md` (without "Controller" suffix)
+5. `autodocs/User/store.md`
 
 ### Multi-Version Safety
 
@@ -182,7 +239,7 @@ Control how external docs interact with PHPDoc in your controllers:
 The API homepage description is loaded from a markdown file:
 
 1. Default: bundled template from the package
-2. After publish: `resources/docs/autodocs-description.md`
+2. After publish: `autodocs/description.md`
 
 Edit this file to customize the description shown on the docs homepage.
 
@@ -231,7 +288,8 @@ php artisan autodocs:generate
 This scans all registered API routes and creates `.md` files with a ready-to-fill template:
 
 ```
-docs/api/
+autodocs/
+├── description.md
 ├── Api/V1/UserController/
 │   ├── index.md
 │   ├── store.md
