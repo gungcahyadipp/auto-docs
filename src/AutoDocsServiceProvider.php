@@ -83,6 +83,10 @@ class AutoDocsServiceProvider extends ServiceProvider
         $this->registerExternalDocsExtension();
 
         if ($this->app->runningInConsole()) {
+            $this->commands([
+                \GungCahyadiPP\AutoDocs\Console\GenerateDocsCommand::class,
+            ]);
+
             $this->publishes([
                 __DIR__.'/../config/autodocs.php' => config_path('autodocs.php'),
             ], 'autodocs-config');

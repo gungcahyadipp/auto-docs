@@ -220,6 +220,54 @@ Scramble::registerExtension(MyTypeToSchemaExtension::class);
 Scramble::registerExtension(MyOperationExtension::class);
 ```
 
+## Auto-Generate Docs Skeleton
+
+Automatically scaffold markdown doc files for all your API endpoints:
+
+```bash
+php artisan autodocs:generate
+```
+
+This scans all registered API routes and creates `.md` files with a ready-to-fill template:
+
+```
+docs/api/
+├── Api/V1/UserController/
+│   ├── index.md
+│   ├── store.md
+│   ├── show.md
+│   ├── update.md
+│   └── destroy.md
+└── Api/V1/OrderController/
+    └── index.md
+```
+
+### Options
+
+| Option | Description |
+|--------|-------------|
+| `--force` | Overwrite existing doc files |
+| `--path=` | Custom output path (default: from config `docs_path`) |
+| `--api-path=` | Filter routes by API path prefix |
+
+### Example
+
+```bash
+# Generate for all API routes
+php artisan autodocs:generate
+
+# Only generate for v2 routes
+php artisan autodocs:generate --api-path=api/v2
+
+# Regenerate all (overwrite existing)
+php artisan autodocs:generate --force
+```
+
+Each generated file includes:
+- Auto-generated title based on method name (e.g. "List all users", "Create a new order")
+- HTTP method and URI as comment
+- Placeholder sections for authentication, request body, and response
+
 ## Testing
 
 ```bash
