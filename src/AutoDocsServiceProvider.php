@@ -16,6 +16,10 @@ class AutoDocsServiceProvider extends ServiceProvider
         // can read it during its own boot phase.
         $this->bridgeConfigToScramble();
 
+        // Register external docs extension BEFORE Scramble boots,
+        // so it's included when Scramble reads Scramble::$extensions
+        $this->registerExternalDocsExtension();
+
         $this->app->register(\Dedoc\Scramble\ScrambleServiceProvider::class);
         $this->app->register(\Dedoc\ScramblePro\ScrambleProServiceProvider::class);
     }
@@ -80,7 +84,6 @@ class AutoDocsServiceProvider extends ServiceProvider
         );
 
         $this->registerSecurityScheme();
-        $this->registerExternalDocsExtension();
 
         if ($this->app->runningInConsole()) {
             $this->commands([
