@@ -78,7 +78,7 @@ class FormRequestParametersExtractor implements ParameterExtractor
 
         // If the classname is actually an interface, it may be bound to the container.
         if (! $reflectionClass->isInstantiable() && app()->bound($requestClassName)) {
-            $classInstance = app()->getBindings()[$requestClassName]['concrete'](app());
+            $classInstance = app()->make($requestClassName);
             $requestClassName = $classInstance::class;
         }
 
