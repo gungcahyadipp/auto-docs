@@ -390,7 +390,7 @@
                         : '#/paths/' + ('/' + path).replace(/\//g, '~1') + '/' + method;
                     endpoints.push({
                         method: method.toUpperCase(),
-                        path: '/' + path,
+                        path: path.startsWith('/') ? path : '/' + path,
                         summary: operation.summary || '',
                         description: operation.description || '',
                         operationId: operationId,
@@ -445,7 +445,9 @@
             return;
         }
         results.innerHTML = items.map((ep, i) => {
-            const fullUrl = serverUrl.replace(/\/$/, '') + ep.path;
+            const base = serverUrl.replace(/\/$/, '');
+            const pathPart = ep.path.startsWith('/') ? ep.path : '/' + ep.path;
+            const fullUrl = (base + pathPart).replace(/([^:])\/\//g, '$1/');
             return `
             <div class="autodocs-search-result ${i === activeIndex ? 'active' : ''}" data-index="${i}" data-hash="${ep.hash}">
                 <span class="autodocs-search-method autodocs-method-${ep.method.toLowerCase()}">${ep.method}</span>
