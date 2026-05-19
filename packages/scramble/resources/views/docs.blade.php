@@ -73,6 +73,186 @@
         [data-theme="dark"] .token.punctuation {
             color: #dbdbdb !important;
         }
+
+        /* Search overlay styles */
+        .autodocs-search-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 99999;
+            justify-content: center;
+            padding-top: 10vh;
+        }
+        .autodocs-search-overlay.active {
+            display: flex;
+        }
+        .autodocs-search-container {
+            width: 100%;
+            max-width: 600px;
+            max-height: 70vh;
+            background: var(--color-canvas, #fff);
+            border: 1px solid var(--color-border, #e2e8f0);
+            border-radius: 12px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        [data-theme="dark"] .autodocs-search-container {
+            background: #1e1e2e;
+            border-color: #444;
+        }
+        .autodocs-search-input-wrapper {
+            display: flex;
+            align-items: center;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--color-border, #e2e8f0);
+            gap: 12px;
+        }
+        [data-theme="dark"] .autodocs-search-input-wrapper {
+            border-color: #444;
+        }
+        .autodocs-search-icon {
+            color: #94a3b8;
+            flex-shrink: 0;
+        }
+        .autodocs-search-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            background: transparent;
+            color: var(--color-text, #1e293b);
+        }
+        [data-theme="dark"] .autodocs-search-input {
+            color: #e2e8f0;
+        }
+        .autodocs-search-input::placeholder {
+            color: #94a3b8;
+        }
+        .autodocs-search-kbd {
+            font-size: 12px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            color: #64748b;
+            font-family: monospace;
+        }
+        [data-theme="dark"] .autodocs-search-kbd {
+            background: #333;
+            border-color: #555;
+            color: #aaa;
+        }
+        .autodocs-search-results {
+            overflow-y: auto;
+            padding: 8px;
+            flex: 1;
+        }
+        .autodocs-search-result {
+            display: flex;
+            align-items: center;
+            padding: 10px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            gap: 12px;
+            text-decoration: none;
+            color: inherit;
+        }
+        .autodocs-search-result:hover,
+        .autodocs-search-result.active {
+            background: #f1f5f9;
+        }
+        [data-theme="dark"] .autodocs-search-result:hover,
+        [data-theme="dark"] .autodocs-search-result.active {
+            background: #2a2a3e;
+        }
+        .autodocs-search-method {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            min-width: 50px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .autodocs-method-get { background: #dcfce7; color: #166534; }
+        .autodocs-method-post { background: #dbeafe; color: #1e40af; }
+        .autodocs-method-put { background: #fef3c7; color: #92400e; }
+        .autodocs-method-patch { background: #fef3c7; color: #92400e; }
+        .autodocs-method-delete { background: #fee2e2; color: #991b1b; }
+        [data-theme="dark"] .autodocs-method-get { background: #064e3b; color: #6ee7b7; }
+        [data-theme="dark"] .autodocs-method-post { background: #1e3a5f; color: #93c5fd; }
+        [data-theme="dark"] .autodocs-method-put { background: #451a03; color: #fcd34d; }
+        [data-theme="dark"] .autodocs-method-patch { background: #451a03; color: #fcd34d; }
+        [data-theme="dark"] .autodocs-method-delete { background: #450a0a; color: #fca5a5; }
+        .autodocs-search-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .autodocs-search-group {
+            font-size: 11px;
+            font-weight: 600;
+            color: #8b5cf6;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        [data-theme="dark"] .autodocs-search-group {
+            color: #a78bfa;
+        }
+        .autodocs-search-name {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-text, #334155);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        [data-theme="dark"] .autodocs-search-name {
+            color: #e2e8f0;
+        }
+        .autodocs-search-path {
+            font-size: 12px;
+            font-family: monospace;
+            color: #64748b;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-top: 1px;
+        }
+        [data-theme="dark"] .autodocs-search-path {
+            color: #94a3b8;
+        }
+        .autodocs-search-summary {
+            font-size: 11px;
+            color: #94a3b8;
+            margin-top: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .autodocs-search-empty {
+            padding: 24px;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 14px;
+        }
+        .autodocs-search-hint {
+            padding: 8px 16px;
+            border-top: 1px solid var(--color-border, #e2e8f0);
+            font-size: 12px;
+            color: #94a3b8;
+            display: flex;
+            gap: 16px;
+        }
+        [data-theme="dark"] .autodocs-search-hint {
+            border-color: #444;
+        }
     </style>
 </head>
 <body style="height: 100vh; overflow-y: hidden">
@@ -110,5 +290,169 @@
         updateTheme(mediaQuery);
     </script>
 @endif
+
+<!-- Search Overlay -->
+<div class="autodocs-search-overlay" id="searchOverlay">
+    <div class="autodocs-search-container">
+        <div class="autodocs-search-input-wrapper">
+            <svg class="autodocs-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.35-4.35"></path>
+            </svg>
+            <input type="text" class="autodocs-search-input" id="searchInput" placeholder="Search endpoints..." autocomplete="off">
+            <kbd class="autodocs-search-kbd">ESC</kbd>
+        </div>
+        <div class="autodocs-search-results" id="searchResults"></div>
+        <div class="autodocs-search-hint">
+            <span>↑↓ Navigate</span>
+            <span>↵ Open</span>
+            <span>ESC Close</span>
+        </div>
+    </div>
+</div>
+
+<script>
+(function() {
+    const spec = @json($spec);
+    let endpoints = [];
+    let activeIndex = 0;
+
+    // Parse OpenAPI spec to extract endpoints
+    function parseEndpoints() {
+        if (!spec || !spec.paths) return;
+        for (const [path, methods] of Object.entries(spec.paths)) {
+            for (const [method, operation] of Object.entries(methods)) {
+                if (['get','post','put','patch','delete','head','options'].includes(method)) {
+                    const operationId = operation.operationId || '';
+                    // Stoplight Elements uses #/operations/{operationId} format
+                    const hash = operationId
+                        ? '#/operations/' + operationId
+                        : '#/paths/' + ('/' + path).replace(/\//g, '~1') + '/' + method;
+                    endpoints.push({
+                        method: method.toUpperCase(),
+                        path: '/' + path,
+                        summary: operation.summary || '',
+                        description: operation.description || '',
+                        operationId: operationId,
+                        tags: (operation.tags || []).join(', '),
+                        hash: hash,
+                    });
+                }
+            }
+        }
+    }
+
+    // Get base server URL from spec
+    const serverUrl = (spec.servers && spec.servers[0] && spec.servers[0].url) || window.location.origin;
+
+    parseEndpoints();
+
+    const overlay = document.getElementById('searchOverlay');
+    const input = document.getElementById('searchInput');
+    const results = document.getElementById('searchResults');
+
+    function openSearch() {
+        overlay.classList.add('active');
+        input.value = '';
+        activeIndex = 0;
+        renderResults([]);
+        setTimeout(() => input.focus(), 50);
+    }
+
+    function closeSearch() {
+        overlay.classList.remove('active');
+        input.value = '';
+    }
+
+    function filterEndpoints(query) {
+        if (!query.trim()) return endpoints;
+        const q = query.toLowerCase();
+        return endpoints.filter(ep =>
+            ep.path.toLowerCase().includes(q) ||
+            ep.method.toLowerCase().includes(q) ||
+            ep.summary.toLowerCase().includes(q) ||
+            ep.tags.toLowerCase().includes(q) ||
+            ep.operationId.toLowerCase().includes(q) ||
+            ep.description.toLowerCase().includes(q)
+        );
+    }
+
+    function renderResults(items) {
+        if (items.length === 0) {
+            results.innerHTML = input.value.trim()
+                ? '<div class="autodocs-search-empty">No endpoints found</div>'
+                : '<div class="autodocs-search-empty">Type to search endpoints...</div>';
+            return;
+        }
+        results.innerHTML = items.map((ep, i) => {
+            const fullUrl = serverUrl.replace(/\/$/, '') + ep.path;
+            return `
+            <div class="autodocs-search-result ${i === activeIndex ? 'active' : ''}" data-index="${i}" data-hash="${ep.hash}">
+                <span class="autodocs-search-method autodocs-method-${ep.method.toLowerCase()}">${ep.method}</span>
+                <div class="autodocs-search-info">
+                    ${ep.tags ? `<div class="autodocs-search-group">${ep.tags}</div>` : ''}
+                    <div class="autodocs-search-name">${ep.summary || ep.operationId || ep.path}</div>
+                    <div class="autodocs-search-path">${fullUrl}</div>
+                    ${ep.description ? `<div class="autodocs-search-summary">${ep.description.substring(0, 100)}${ep.description.length > 100 ? '...' : ''}</div>` : ''}
+                </div>
+            </div>`;
+        }).join('');
+    }
+
+    function navigateTo(hash) {
+        closeSearch();
+        window.location.hash = hash;
+    }
+
+    // Event: keyboard shortcut to open (Ctrl+K / Cmd+K)
+    document.addEventListener('keydown', function(e) {
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+            e.preventDefault();
+            openSearch();
+        }
+        if (e.key === 'Escape' && overlay.classList.contains('active')) {
+            closeSearch();
+        }
+    });
+
+    // Event: input filtering
+    input.addEventListener('input', function() {
+        const filtered = filterEndpoints(this.value);
+        activeIndex = 0;
+        renderResults(filtered);
+    });
+
+    // Event: keyboard navigation in results
+    input.addEventListener('keydown', function(e) {
+        const items = results.querySelectorAll('.autodocs-search-result');
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            activeIndex = Math.min(activeIndex + 1, items.length - 1);
+            renderResults(filterEndpoints(input.value));
+            items[activeIndex]?.scrollIntoView({ block: 'nearest' });
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            activeIndex = Math.max(activeIndex - 1, 0);
+            renderResults(filterEndpoints(input.value));
+            items[activeIndex]?.scrollIntoView({ block: 'nearest' });
+        } else if (e.key === 'Enter') {
+            e.preventDefault();
+            const active = results.querySelector('.autodocs-search-result.active');
+            if (active) navigateTo(active.dataset.hash);
+        }
+    });
+
+    // Event: click on result
+    results.addEventListener('click', function(e) {
+        const item = e.target.closest('.autodocs-search-result');
+        if (item) navigateTo(item.dataset.hash);
+    });
+
+    // Event: click overlay background to close
+    overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) closeSearch();
+    });
+})();
+</script>
 </body>
 </html>
